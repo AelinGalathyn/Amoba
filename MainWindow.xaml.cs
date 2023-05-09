@@ -141,20 +141,23 @@ namespace Amoba
                 }
             }
 
-            string diagonal2FirstElement = (innerGrid.Children[(x - 1) * x] as Button).Content.ToString();
-            for (int i = 1; i < x; i++)
+            string diagonal2FirstElement = (innerGrid.Children[x - 1] as Button).Content.ToString();
+            if (diagonal2FirstElement != "")
             {
-                string currentElement = (innerGrid.Children[(x - i) * x + i] as Button).Content.ToString();
-                if (currentElement != diagonal2FirstElement)
+                for (int i = 1; i < x; i++)
                 {
-                    diag = false;
-                    break;
+                    string currentElement = (innerGrid.Children[(x - i) * x + i] as Button).Content.ToString();
+                    if (currentElement != diagonal2FirstElement)
+                    {
+                        diag = false;
+                        break;
+                    }
                 }
-            }
-            if (diag)
-            {
-                // Bingo in diagonal from bottom left to top right
-                return true;
+                if (diag)
+                {
+                    // Bingo in diagonal from bottom left to top right
+                    return true;
+                }
             }
             return false;
         }
@@ -191,7 +194,7 @@ namespace Amoba
             for (int i = 0; i < x; i++)
             {
                 bool win = true;
-                string firstElement = (innerGrid.Children[(x - 1) * x] as Button).Content.ToString();
+                string firstElement = (innerGrid.Children[i * x] as Button).Content.ToString();
                 if (firstElement != "")
                 {
                     for (int j = 1; j < x; j++)
